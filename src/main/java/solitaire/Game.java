@@ -517,57 +517,67 @@ public class Game {
                     }
                 }
 
-                Card Card2= lane2.get(lane2.size()-1);
+                if(lane2.size()>0){
+                    Card Card2= lane2.get(lane2.size()-1);
 
-                //check red cards
-                if(Card1.getSuit().equalsIgnoreCase("H") || Card1.getSuit().equalsIgnoreCase("D")){
-                    if(Card2.getSuit().equalsIgnoreCase("S") || Card2.getSuit().equalsIgnoreCase("C")){
-                        
-                        int index;
-                        index = ranks.indexOf(Card1.getRank());
+                    //check red cards
+                    if(Card1.getSuit().equalsIgnoreCase("H") || Card1.getSuit().equalsIgnoreCase("D")){
+                        if(Card2.getSuit().equalsIgnoreCase("S") || Card2.getSuit().equalsIgnoreCase("C")){
+                            
+                            int index;
+                            index = ranks.indexOf(Card1.getRank());
 
-                        if(Card2.getRank().equals(ranks.get(index-1))){
-                            lane1.remove(Card1);    
-                            lane2.add(Card1);
-                                
+                            if(Card2.getRank().equals(ranks.get(index-1))){
+                                lane1.remove(Card1);    
+                                lane2.add(Card1);
+                                    
 
-                            if(lane1.size()>0){
-                                lane1.get(lane1.size()-1).flip();
+                                if(lane1.size()>0){
+                                    lane1.get(lane1.size()-1).flip();
+                                }
+                                point+= 5;
+                                return "OK";
                             }
-                            point+= 5;
-                            return "OK";
+                            else 
+                                return "Invalid";
+
                         }
                         else 
-                            return "Invalid";
-
+                        return "Invalid";
                     }
-                    else 
-                    return "Invalid";
-                }
-                
-                //check black cards
-                if(Card1.getSuit().equalsIgnoreCase("S") || Card1.getSuit().equalsIgnoreCase("C")){
-                    if(Card2.getSuit().equalsIgnoreCase("H") || Card2.getSuit().equalsIgnoreCase("D")){
-                        
-                        int index;
-                        index = ranks.indexOf(Card1.getRank());
-                        if(Card2.getRank().equals(ranks.get(index-1))){
-                            lane1.remove(Card1);    
-                            lane2.add(Card1);
-                                
+                    
+                    //check black cards
+                    if(Card1.getSuit().equalsIgnoreCase("S") || Card1.getSuit().equalsIgnoreCase("C")){
+                        if(Card2.getSuit().equalsIgnoreCase("H") || Card2.getSuit().equalsIgnoreCase("D")){
+                            
+                            int index;
+                            index = ranks.indexOf(Card1.getRank());
+                            if(Card2.getRank().equals(ranks.get(index-1))){
+                                lane1.remove(Card1);    
+                                lane2.add(Card1);
+                                    
 
-                            if(lane1.size()>0){
-                                lane1.get(lane1.size()-1).flip();
+                                if(lane1.size()>0){
+                                    lane1.get(lane1.size()-1).flip();
+                                }
+                                point+= 5;
+                                return "OK";
                             }
-                            point+= 5;
-                            return "OK";
+                            else 
+                                return "Invalid";
+
                         }
                         else 
-                            return "Invalid";
-
+                        return "Invalid";
                     }
-                    else 
-                    return "Invalid";
+                }else if(lane2.size()==0) {
+                    if(Card1.getRank().equalsIgnoreCase("k")){
+                        lane1.remove(Card1);    
+                        lane2.add(Card1);
+
+                        return "OK";
+                    }
+                    else return "Invalid";
                 }
 
             }
